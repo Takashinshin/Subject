@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8"/>
+  <title>検索画面</title>
+</head>
+<body>
+	<form method="POST" action="/search_result" th:object="${employeeForm}">
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<td><input type="text" th:value="*{id}" th:field="*{id}"/></td>
+		</tr>
+		<tr>
+			<th>名前</th>
+			<td><input type="text" th:value="*{name}" th:field="*{name}"/></td>
+		</tr>
+		<tr>
+			<th>年齢</th>
+			<td><input type="text" th:value="*{age}" th:field="*{age}"/></td>
+		</tr>
+		<tr>
+			<th>性別</th>
+			<td>
+				<select th:field="*{gender}">
+				<option value=""></option>
+					<option th:each="item : *{getGenderItems()}" th:value="${item.key}" th:text="${item.value}"/>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>生年月日</th>
+			<td><input type="text" th:value="*{dob}" th:field="*{dob}" maxlength="8"/></td>
+		</tr>
+	</table>
+	<br/><br/>
+	<input type="submit" value="検索"/><br/><br/>
+	<input type="submit"　onclick="location.href='./'" value="戻る"/>
+	</form>
+</body>
+</html>

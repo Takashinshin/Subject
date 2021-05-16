@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.EmployeeInfoMapper">
+	<select id="findBySearchForm"
+			parameterType="com.example.demo.form.EmployeeForm" 
+			resultType="com.example.demo.entity.EmployeeInfo">
+			SELECT e.id, e.name, e.age, e.gender, e.dob FROM employee e
+		<if 
+			test="(id != null and id != '') or (name != null and name != '') or (age != null and age !='') or (gender != null and gender !='') or (dob != null and dob !='')">
+			WHERE
+		</if>
+		<if test="id != null and id !=''">
+			e.id = #{id}
+		</if>
+		<if test = "name != null and name != ''">
+			<if test="id == null or id = ''">
+				e.name like '%${name}%'
+			</if>
+			<if test="id != null and id !=''">
+				AND e.name like '%${name}%'
+			</if>
+		</if>
+		<if test="age != null and age !=''">
+			<if test="(id == null or id = '') and (name == null or name == '')">
+				e.age = #{age}
+			</if>
+			<if test="(id != null and id != '') or (name != null and name != '')">
+				AND e.age = #{age}
+			</if>
+		</if>
+		<if test="gender != null and gender !=''">
+			<if test="(id == null or id = '') and (name == null or name == '') and (age == null or age == '')">
+				e.gender = #{gender}
+			</if>
+			<if test="(id != null and id != '') or (name != null and name != '') or (age != null and age != '')">
+				AND e.gender=#{gender}
+			</if>
+		</if>
+		<if test="dob != null and dob != ''">
+			<if
+				test="(id == null or id = '') and (name == null or name == '') and (age == null or age == '') and (gender == null or gender == '')">
+				e.dob = #{dob}
+			</if>
+			<if 
+				test="(id != null and id != '') or (name != null and name != '') or (age != null and age != '') or (gender != null and gender != '')">
+				AND e.dob = #{dob}
+			</if>
+		</if>
+		ORDER BY e.id
+	</select>
+	<select id="createRegisterForm" parameterType="com.example.demo.form.EmployeeForm" resultType="com.example.demo.entity.EmployeeInfo">
+		INSERT INTO employee (id, name, age, gender, dob) VALUES (#{id}, #{name}, #{age}, #{gender}, #{dob})
+	</select>
+	
+	<select id="findMaxId" resultType="string">
+			SELECT COALESCE(max(id), 0) FROM employee
+	</select>
+	
+</mapper>

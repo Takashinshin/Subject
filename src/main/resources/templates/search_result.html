@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8"/>
+  <title>検索結果</title>
+</head>
+<body>
+	<table border="1">
+     	<tr>
+     		<th>ID</th>
+     		<th>名前</th>
+     		<th>年齢</th>
+     		<th>性別</th>
+     		<th>生年月日</th>
+     	</tr>
+     	<tr th:each="obj : ${demoFormList}">
+     		<td th:text="${obj.id}"></td>
+     		<td th:text="${obj.name}"></td>
+     		<td th:text="${obj.age}"></td>
+     		<td th:text="${obj.gender}"></td>
+     		<td th:text="${obj.dob}"></td>
+     	</tr>
+    </table>
+    <br/><br/>
+    <form method="POST" action="/add">
+    	<input type="button" onclick="location.href='./search'" value="戻る"/>
+    	<input type="button" onclick="location.href='./'" value="トップに戻る" />
+    </form>
+</body>
+</html>

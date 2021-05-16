@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>登録確認画面</title>
+</head>
+<body>
+<form method="post" th:action="@{/complete}" th:object="${employeeForm}">
+	<p>入力内容確認</p>
+	<p th:text="'ID： ' + *{id}"></p>
+	<p th:text="'名前： ' + *{name}"></p>
+	<p th:text="'年齢： ' + *{age}"></p>
+	<p th:text="'性別： ' + *{getGenderItems().get('__*{gender}__')}"></p>
+	<p th:text="'生年月日： ' + *{dob}"></p>
+	<input type="button" onclick="location.href='./register'" value="戻る" />
+	<input type="submit" name="next" value="送信" />
+</form>
+</body>
+</html>
