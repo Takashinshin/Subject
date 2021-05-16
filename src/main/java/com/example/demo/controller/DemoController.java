@@ -4,7 +4,6 @@ package com.example.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,6 +69,21 @@ public class DemoController {
 	public String confirm() {
 		return "confirm";
 	}
+	//更新画面に遷移
+	@RequestMapping("/updata")
+	public String updata() {
+		return "updata";
+	}
+	
+	//消去画面に遷移
+	@RequestMapping("/delete")
+	public String delete() {
+		return "delete";
+	}
+
+	
+	
+	
 	
 	//検索処理を行い、一覧画面に遷移する
 	@RequestMapping("/search_result")

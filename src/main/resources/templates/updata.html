@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>データ更新画面</title>
+</head>
+<body>
+	<form method="post" action="/updata_confirm" th:object="${employeeForm}">
+
+		 <ul>
+			<li th:each="error : ${#fields.detailedErrors()}" style="color: red">
+				<span th:text="${error.message}"></span>
+			</li>
+		</ul>
+		<p>ID：　<input type="text" th:value="*{id}" th:field="*{id}" /></p>
+		<p>名前：　<input type="text" th:value="*{name}" th:field="*{name}" /></p>
+		<p>年齢：　<input type="text" th:value="*{age}" th:field="*{age}" /></p>
+		<p>性別：　<for th:each="item : *{getGenderItems()}">
+					   <input type="radio" name="gender" th:value="${item.key}" th:text="${item.value}" th:field="*{gender}" />
+				   </for>
+		<p>生年月日：　<input type="text" th:value="*{dob}" th:field="*{dob}" maxlength="8"/></p>
+		</p>
+		<input type="submit" name="next" value="確認" />
+		<input type="button" onclick="location.href='./'" value="戻る" />
+	</form>
+	
+</body>
+</html>
